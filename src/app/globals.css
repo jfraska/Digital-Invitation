@@ -1,27 +1,116 @@
 @tailwind base;
+@layer base {
+}
+
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.has-scroll-smooth {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.carousel_sticky-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200vh;
+  pointer-events: none;
+}
+
+.swiper-slide {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  padding: 50px 0;
+}
+.swiper-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-background-size: cover;
+  background-position: center;
+  background-size: cover;
+  background-color: #3c48e3;
+  background-blend-mode: multiply;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  bottom: 8% !important;
+  right: 20% !important;
+  width: auto !important;
+  left: auto !important;
+  margin: 0;
+}
+
+.swiper-pagination-bullet {
+  border: 1px solid currentColor;
+  transition: opacity 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+@layer components {
+  .hover-underline-animation {
+    @apply relative inline-block text-black-200;
   }
-}
+  .hover-underline-animation::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+    @apply bg-black-200;
+  }
+  .hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .parallax {
+    overflow: hidden;
+    letter-spacing: -2px;
+    line-height: 0.8;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .parallax .scroller {
+    @apply flex flex-nowrap whitespace-nowrap uppercase text-[300px];
+  }
+
+  .parallax span {
+    @apply block mr-7;
+  }
+
+  .img-gray {
+    filter: grayscale(100%);
+  }
 }
