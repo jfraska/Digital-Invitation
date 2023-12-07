@@ -1,4 +1,5 @@
-import React, { createContext, useEffect, useState } from "react";
+"use client";
+import { createContext, useEffect, useState } from "react";
 
 export const SmoothScrollContext = createContext({
   scroll: null,

@@ -1,12 +1,16 @@
+"use client";
+
 import { useEffect, useContext, useState } from "react";
 import { SmoothScrollContext } from "@/contexts/SmoothScroll.context";
 import { motion, useAnimation } from "framer-motion";
+import { Icon } from "@iconify/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Parallax, Pagination, Controller } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import Statue from "./canvas/Statue";
 
 const params = {
   style: {
@@ -84,12 +88,13 @@ export default function Hero() {
           </SwiperSlide>
           <SwiperSlide>
             <div
-              className="parallax-bg"
+              className="parallax-bg "
               style={{
-                "background-image":
-                  "url('https://source.unsplash.com/collection/2091539/1000x450')",
+                "background-color": "#000000",
               }}
-            />
+            >
+              <Statue />
+            </div>
           </SwiperSlide>
           <SwiperSlide>
             <div
@@ -115,24 +120,24 @@ export default function Hero() {
             data-scroll-speed="2.5"
             data-scroll-position="top"
             data-swiper-parallax="-200"
-            className="absolute z-10 m-auto text-center inset-x-0 bottom-[30%]"
+            className="absolute z-10 m-auto text-center inset-x-0 bottom-[40%] md:bottom-[30%]"
           >
-            <div className="flex flex-col font-serif uppercase gap-0">
-              <h1 className="text-6xl text-slate-200 leading-[0.8]">
+            <div className="flex flex-col font-serif uppercase text-4xl md:text-6xl">
+              <h1 className="text-slate-200 leading-[0.8]">
                 Premium Invitation
               </h1>
-              <h1 className="text-6xl text-slate-100 leading-[0.8]">
+              <h1 className="text-slate-100 leading-[0.8]">
                 Premium Invitation
               </h1>
-              <h1 className="text-6xl text-slate-100 leading-[0.8]">
+              <h1 className="text-slate-100 leading-[0.8]">
                 Premium Invitation
               </h1>
             </div>
             <br />
-            <p className="text-xl text-slate-100">
+            <p className="text-base md:text-xl text-slate-100">
               Welcome to the future of event invitations!
             </p>
-            <p className="text-xl text-slate-100">
+            <p className="text-base md:text-xl text-slate-100">
               We specialize in delivering digital elegance right to your
               fingertips.
             </p>
@@ -181,7 +186,7 @@ export default function Hero() {
           data-scroll-target="#beranda"
           data-scroll-speed="2"
           data-scroll-position="top"
-          className="swiper-pagination"
+          className="hidden md:block swiper-pagination"
         ></div>
       </Swiper>
       <div
@@ -189,9 +194,16 @@ export default function Hero() {
         data-scroll-target="#beranda"
         data-scroll-speed="2"
         data-scroll-position="top"
-        className="absolute bottom-[8%] right-[3%] text-base text-white"
+        className="absolute w-full flex flex-col items-center gap-2 md:text-start md:w-fit bottom-[5%] md:bottom-[8%] md:right-[3%] text-lg text-white"
       >
-        Scroll
+        <h1>(Scroll)</h1>
+        <Icon
+          className="block md:hidden"
+          icon="uim:triangle"
+          color="white"
+          width="15"
+          vFlip={true}
+        />
       </div>
     </section>
   );

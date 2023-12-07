@@ -84,12 +84,9 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 
 export default function ScrollVelocity() {
   return (
-    <section data-scroll-section className="w-full h-fit py-6">
-      <div className="w-full px-[3%]">
-        <div className="w-full mb-4 border-b border-black" />
-      </div>
-      <ParallaxText baseVelocity={-1.5}>zoejeton zoejeton</ParallaxText>
-      <ParallaxText baseVelocity={1.5}>digital invitation</ParallaxText>
+    <section data-scroll-section className="w-full mb-16 h-fit">
+      <ParallaxText baseVelocity={-0.5}>zoejeton premium *</ParallaxText>
+      <ParallaxText baseVelocity={0.5}>digital invitation *</ParallaxText>
     </section>
   );
 }

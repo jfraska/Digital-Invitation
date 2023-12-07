@@ -6,19 +6,22 @@ export default function Feature() {
   return (
     <section
       data-scroll-section
-      className="relative w-full pb-20 h-fit mx-auto px-[3%]"
+      className="relative w-full h-screen px-[3%] bg-[#121212]"
       id="feature"
     >
-      <div className="w-full mt-2 border-b border-black" />
-      <h1 className="text-sm align-text-bottom  mt-2">
-        <span className="text-lg">● &nbsp;</span>Feature
+      <h1 className="absolute text-white -left-6 top-1/3 font-serif text-5xl leading-none">
+        Feature
       </h1>
-      <div className="flex mt-10 w-full items-center">
+
+      <h1 className="absolute bottom-1/4 -right-20 font-serif text-white text-6xl leading-none">
+        Premium
+      </h1>
+      {/* <div className="flex mt-10 w-full items-center">
         <div className="w-[40%]">
           <div className="w-[50%] m-auto">
             <h1 className="text-4xl">Feature</h1>
             <h2 className="font-bold text-4xl">Premium</h2>
-            <p className="text-lg">
+            <p className="text-sm">
               Our seamless and stylish digital wedding invitations are designed
               to make your special moments even more memorable. With us, you'll
               discover an eco-friendly and user-friendly solution that can also
@@ -48,7 +51,7 @@ export default function Feature() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

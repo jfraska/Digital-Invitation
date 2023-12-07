@@ -1,36 +1,44 @@
-"use client";
+import "./style.css";
 
 import { SmoothScrollProvider } from "@/contexts/SmoothScroll.context";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Feature from "@/components/Feature";
-import Hero from "@/components/Hero";
 import Pricing from "@/components/Pricing";
 import ScrollVelocity from "@/components/ScrollVelocity";
 import Template from "@/components/Template";
-import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Message from "@/components/Message";
+
+const settings = {
+  options: {
+    smooth: true,
+    lerp: 0.2,
+    multiplier: 0.3,
+    mobile: {
+      smooth: true,
+    },
+    // ... all available Locomotive Scroll instance options
+  },
+};
 
 export default function Home() {
-  const settings = {
-    options: {
-      smooth: true,
-      lerp: 0.4,
-      multiplier: 0.5,
-      // ... all available Locomotive Scroll instance options
-    },
-  };
-
   return (
     <SmoothScrollProvider {...settings}>
-      <div data-scroll-container>
-        <Navbar />
+      <Navbar />
+      <main data-scroll-container>
         <Hero />
-        <ScrollVelocity />
         <About />
         <Feature />
+        <ScrollVelocity />
         <Template />
         {/* <Pricing /> */}
-      </div>
+        <Message />
+        <Footer />
+      </main>
     </SmoothScrollProvider>
   );
 }

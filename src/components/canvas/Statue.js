@@ -4,20 +4,53 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Preload, useGLTF, Stage, OrbitControls } from "@react-three/drei";
 import { Vector3 } from "three";
 
-const Scene = ({ isMobile }) => {
-  const model = useGLTF(`/three_graces/scene.gltf`);
-
+const Model = (props) => {
+  const { nodes, materials } = useGLTF("/three_graces/scene.gltf");
   return (
-    <mesh>
-      <primitive
-        object={model.scene}
-        scale={isMobile ? 0.5 : 1}
-        position={isMobile ? [0, 0, 0] : [0, -5, 0]}
-      />
-      <meshPhongMaterial shininess={45} />
-    </mesh>
+    <group {...props} dispose={null}>
+      <group rotation={[-Math.PI / 2, 0, 0]}>
+        <mesh
+          geometry={nodes.Object_2.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_3.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_4.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_5.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_6.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_7.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_8.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_9.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+        <mesh
+          geometry={nodes.Object_10.geometry}
+          material={materials["Scene_-_Root"]}
+        />
+      </group>
+    </group>
   );
 };
+
+useGLTF.preload("/three_graces/scene.gltf");
 
 function MousePointLight() {
   const pointLightRef = useRef();
@@ -45,37 +78,13 @@ function MousePointLight() {
 }
 
 export default function Statue() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
-
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
-  }, []);
-
   return (
-    <Canvas
-      // antialias={true}
-      // alpha={true}
-      camera={{ position: [0, 0, 0], fov: 25 }}
-      // gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={"loading"}>
-        <ambientLight intensity={0.4} />
-        <MousePointLight />
-        <Scene isMobile={isMobile} />
+    <Canvas>
+      <ambientLight intensity={0.6} />
+      <directionalLight intensity={0.5} />
+      <Suspense fallback={null}>
+        <Model position={[-15, -60, 0]} scale={[0.5, 0.5, 0.6]} />
       </Suspense>
-      <Preload all />
     </Canvas>
   );
 }

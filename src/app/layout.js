@@ -1,5 +1,4 @@
 import "./globals.css";
-import "locomotive-scroll/dist/locomotive-scroll.css";
 import localFont from "next/font/local";
 
 const MonumentExtended = localFont({
@@ -50,7 +49,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${MonumentExtended.variable} ${NeueMontreal.variable} font-sans`}
       >
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );

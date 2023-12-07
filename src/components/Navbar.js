@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState, useRef, useContext } from "react";
 import { SmoothScrollContext } from "@/contexts/SmoothScroll.context";
-import { Link } from "react-scroll";
+import Hamburger from "./Hamburger";
+import localFont from "next/font/local";
+import Link from "next/link";
 import { navLinks } from "@/constants";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-import localFont from "next/font/local";
 import Image from "next/image";
-import Hamburger from "./Hamburger";
 
 const runalto = localFont({
   src: "../assets/fonts/runalto/runalto.ttf",
@@ -42,7 +42,7 @@ export default function Navbar() {
   return (
     <nav>
       <div
-        className={`top-0 inset-x-0 z-50 py-3 px-[3%] flex justify-between items-center mx-auto ${
+        className={`top-0 inset-x-0 z-50 py-2 px-[3%] flex justify-between items-center mx-auto ${
           scrolled
             ? "fixed bg-primary text-black"
             : "absolute bg-transparent text-white"
@@ -51,7 +51,7 @@ export default function Navbar() {
         <Hamburger open={toggle} setOpen={setToggle} scroll={scrolled} />
 
         <h1
-          className={`${runalto.className} ${
+          className={`${runalto.className} font-bold ${
             toggle ? "text-black" : null
           } transition-all ease-linear text-lg font-bold`}
         >
@@ -59,7 +59,7 @@ export default function Navbar() {
         </h1>
 
         <div
-          className={`flex items-center gap-2 text-base font-medium cursor-pointer ${
+          className={`hidden md:flex items-center gap-2 text-base font-medium cursor-pointer ${
             toggle ? "text-black" : null
           } transition-all ease-linear`}
         >
@@ -80,8 +80,8 @@ export default function Navbar() {
         }}
         className={`flex fixed justify-stretch top-0 z-40 items-end w-full h-[70%] pb-10 pt-20 px-[4%] bg-white shadow-lg`}
       >
-        <div className="flex gap-5 items-end w-[70%]">
-          <Link>
+        <div className="hidden md:flex gap-5 items-end w-[70%]">
+          <Link href="#">
             <Image
               className="img-gray"
               src="/atm-bersama.svg"
@@ -90,7 +90,7 @@ export default function Navbar() {
               alt="atm bersama"
             />
           </Link>
-          <Link>
+          <Link href="#">
             <Image
               className="img-gray"
               src="/gopay.svg"
@@ -99,7 +99,7 @@ export default function Navbar() {
               alt="gopay"
             />
           </Link>
-          <Link>
+          <Link href="#">
             <Image
               className="img-gray"
               src="/dana.svg"
@@ -108,7 +108,7 @@ export default function Navbar() {
               alt="dana"
             />
           </Link>
-          <Link>
+          <Link href="#">
             <Image src="/qris.svg" width={60} height={60} alt="qris" />
           </Link>
         </div>
@@ -118,10 +118,7 @@ export default function Navbar() {
             <li>
               <Link
                 className="cursor-pointer"
-                to={`beranda`}
-                spy={true}
-                smooth="easeInQuad"
-                duration={800}
+                href="#"
                 onClick={() => setToggle(false)}
               >
                 Beranda
@@ -130,10 +127,7 @@ export default function Navbar() {
             <li>
               <Link
                 className="cursor-pointer"
-                to={`about`}
-                spy={true}
-                smooth="easeInQuad"
-                duration={800}
+                href="#"
                 onClick={() => setToggle(false)}
               >
                 About Us
@@ -142,10 +136,7 @@ export default function Navbar() {
             <li>
               <Link
                 className="cursor-pointer"
-                to={`feature`}
-                spy={true}
-                smooth="easeInQuad"
-                duration={800}
+                href="#"
                 onClick={() => setToggle(false)}
               >
                 Featured
@@ -154,10 +145,7 @@ export default function Navbar() {
             <li>
               <Link
                 className="cursor-pointer"
-                to={`tamplate`}
-                spy={true}
-                smooth="easeInQuad"
-                duration={800}
+                href="#"
                 onClick={() => setToggle(false)}
               >
                 Template
@@ -166,10 +154,7 @@ export default function Navbar() {
             <li>
               <Link
                 className="cursor-pointer"
-                to={`pricing`}
-                spy={true}
-                smooth="easeInQuad"
-                duration={800}
+                href="#"
                 onClick={() => setToggle(false)}
               >
                 Pricing
@@ -177,7 +162,7 @@ export default function Navbar() {
             </li>
           </ul>
           <div className="flex gap-2">
-            <Link>
+            <Link href="#">
               <Image
                 src="/instagram.png"
                 width={30}
@@ -185,7 +170,7 @@ export default function Navbar() {
                 alt="instagram"
               />
             </Link>
-            <Link>
+            <Link href="#">
               <Image src="/tiktok.png" width={30} height={30} alt="tiktok" />
             </Link>
           </div>
@@ -203,13 +188,15 @@ export default function Navbar() {
         className={`flex fixed flex-col top-0 z-30 justify-end w-full h-[85%] px-[4%] p-5 bg-white shadow-md`}
       >
         <div className="flex justify-stretch items-end">
-          <h3 className="w-[70%] text-[210px] h-[230px]">Invitation</h3>
+          <h3 className="hidden md:block w-[70%] text-[210px] h-[230px]">
+            Invitation
+          </h3>
           <diV className="flex flex-col font-light">
             <div>
-              <Link>Tentang Kami</Link>
+              <Link href="#">Tentang Kami</Link>
             </div>
             <div>
-              <Link>Layanan</Link>
+              <Link href="#">Layanan</Link>
             </div>
           </diV>
         </div>
