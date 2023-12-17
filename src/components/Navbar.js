@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState, useRef, useContext } from "react";
-import { SmoothScrollContext } from "@/contexts/SmoothScroll.context";
+import { useEffect, useState, useRef } from "react";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 import Hamburger from "./Hamburger";
 import localFont from "next/font/local";
 import Link from "next/link";
@@ -19,7 +19,7 @@ export default function Navbar() {
   const ref = useRef(null);
   const [divHeight, setDivHeight] = useState(0);
 
-  const { scroll } = useContext(SmoothScrollContext);
+  const { scroll } = useLocomotiveScroll();
 
   useEffect(() => {
     setDivHeight(ref.current.offsetHeight);
@@ -205,6 +205,7 @@ export default function Navbar() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: toggle ? 0.3 : 0 }}
+        transition={{ delay: toggle ? 0.3 : 0 }}
         className={`${toggle ? "fixed " : "hidden"} bg-black z-0 inset-0`}
       />
     </nav>

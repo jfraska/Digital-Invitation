@@ -5,7 +5,7 @@ export default function Message() {
   return (
     <section
       data-scroll-section
-      className="w-full mt-20 mb-5 flex gap-2 flex-nowrap whitespace-nowrap overflow-hidden"
+      className="relative w-full pt-20 pb-5 flex gap-2 flex-nowrap whitespace-nowrap overflow-hidden z-10 shadow-xl bg-white"
     >
       <div className="flex gap-2 text-black items-stretch">
         <div className="flex gap-0 flex-col">

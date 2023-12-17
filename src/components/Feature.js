@@ -1,21 +1,97 @@
 "use client";
+import { useLayoutEffect, useRef } from "react";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
+import { gsap } from "gsap/dist/gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { Icon } from "@iconify/react";
 import { feature } from "@/constants";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Feature() {
+  const { scroll } = useLocomotiveScroll();
+  const ref = useRef(null);
+
+  useLayoutEffect(() => {
+    let ctx;
+    if (scroll) {
+      const element = scroll?.el;
+      scroll.on("scroll", ScrollTrigger.update);
+
+      ScrollTrigger.scrollerProxy(element, {
+        scrollTop(value) {
+          return arguments.length
+            ? scroll.scrollTo(value, { duration: 0, disableLerp: true })
+            : scroll.scroll.instance.scroll.y;
+        },
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          };
+        },
+        pinType: element.style.transform ? "transform" : "fixed",
+      });
+
+      ScrollTrigger.addEventListener("refresh", () => scroll?.update());
+
+      ctx = gsap.context(() => {
+        // let sections = gsap.utils.toArray(".container-featured");
+        gsap.to(ref.current, {
+          // xPercent: -100 * (sections.length - 1),
+          scrollTrigger: {
+            trigger: ref.current,
+            scroller: scroll?.el,
+            start: "top top",
+            end: () => "+=" + ref.current.offsetWidth,
+            scrub: true,
+            markers: true,
+            pin: true,
+            onRefresh: (self) => console.log("refresh", self.start, self.end),
+          },
+        });
+        ScrollTrigger.refresh();
+      }, ref);
+    }
+    return () => ctx && ctx.revert();
+  }, [scroll]);
+
   return (
     <section
       data-scroll-section
-      className="relative w-full h-screen px-[3%] bg-[#121212]"
+      ref={ref}
+      className="relative w-full h-screen"
       id="feature"
     >
-      <h1 className="absolute text-white -left-6 top-1/3 font-serif text-5xl leading-none">
-        Feature
-      </h1>
+      <div
+        data-scroll
+        data-scroll-speed="10"
+        data-scroll-target="#feature"
+        className="z-0 w-full h-full"
+      >
+        <div className="container-featured relative w-full h-full bg-[#121212]">
+          <h1 className="absolute text-white -left-6 top-1/3 font-serif text-5xl leading-none">
+            Feature
+          </h1>
 
-      <h1 className="absolute bottom-1/4 -right-20 font-serif text-white text-6xl leading-none">
-        Premium
-      </h1>
+          <h1 className="absolute bottom-1/4 -right-20 font-serif text-white text-6xl leading-none">
+            Premium
+          </h1>
+        </div>
+
+        <div className="container-featured relative w-full h-full  bg-[#121212]">
+          <h1 className="absolute text-white -left-6 top-1/3 font-serif text-5xl leading-none">
+            Feature
+          </h1>
+
+          <h1 className="absolute bottom-1/4 -right-20 font-serif text-white text-6xl leading-none">
+            Premium
+          </h1>
+        </div>
+      </div>
+
       {/* <div className="flex mt-10 w-full items-center">
         <div className="w-[40%]">
           <div className="w-[50%] m-auto">

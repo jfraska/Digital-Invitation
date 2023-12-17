@@ -16,7 +16,7 @@ const StyledBurger = styled.button`
     outline: none;
   }
 
-  div {
+  span {
     width: 25px;
     height: 2.5px;
     background: ${({ open, scroll }) =>
@@ -29,8 +29,8 @@ const StyledBurger = styled.button`
 
 export default function Hamburger({ open, scroll, setOpen }) {
   useEffect(() => {
-    const firstChild = document.querySelector("button div:first-child");
-    const secondChild = document.querySelector("button div:nth-child(2)");
+    const firstChild = document.querySelector("button span:first-child");
+    const secondChild = document.querySelector("button span:nth-child(2)");
 
     firstChild.style.transform = open
       ? "rotate(45deg) translate(0, -4px)"
@@ -42,8 +42,8 @@ export default function Hamburger({ open, scroll, setOpen }) {
 
   return (
     <StyledBurger open={open} scroll={scroll} onClick={() => setOpen(!open)}>
-      <div />
-      <div />
+      <span />
+      <span />
     </StyledBurger>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useContext } from "react";
-import { SmoothScrollContext } from "@/contexts/SmoothScroll.context";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 import {
   motion,
   useScroll,
@@ -14,7 +14,7 @@ import { wrap } from "@motionone/utils";
 
 function ParallaxText({ children, baseVelocity = 100 }) {
   const baseX = useMotionValue(0);
-  const { scroll } = useContext(SmoothScrollContext);
+  const { scroll } = useLocomotiveScroll();
   const y = useSpring(0, {
     damping: 100,
     stiffness: 400,
@@ -71,7 +71,7 @@ function ParallaxText({ children, baseVelocity = 100 }) {
    * dynamically generated number of children.
    */
   return (
-    <div data-scroll className="parallax">
+    <div data-scroll className="parallax leading-none">
       <motion.div className="scroller" style={{ x }}>
         <span>{children} </span>
         <span>{children} </span>
@@ -84,8 +84,13 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 
 export default function ScrollVelocity() {
   return (
-    <section data-scroll-section className="w-full mb-16 h-fit">
+    <section data-scroll-section className="w-full h-fit">
       <ParallaxText baseVelocity={-0.5}>zoejeton premium *</ParallaxText>
+      <div className="w-full border-b border-black" />
+      <ParallaxText baseVelocity={0.5}>zoejeton premium *</ParallaxText>
+      <div className="w-full border-b border-black" />
+      <ParallaxText baseVelocity={-0.5}>digital invitation *</ParallaxText>
+      <div className="w-full border-b border-black" />
       <ParallaxText baseVelocity={0.5}>digital invitation *</ParallaxText>
     </section>
   );

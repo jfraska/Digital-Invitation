@@ -32,9 +32,13 @@ export default function Template() {
 
   return (
     <section data-scroll-section id="template" className="px-[3%]">
-      <h1 className="text-sm">Showing 8 of 12 template invitation</h1>
-      <div className="w-full mt-2 border-b border-black" />
-      <div className="flex flex-col md:flex-row mt-10 w-full justify-between items-center">
+      <div className="w-full mt-1.5 border-b border-black" />
+      {/* <h1 className="text-sm">Showing 8 of 12 template invitation</h1> */}
+      <div className="flex justify-between items-end mt-4 font-medium">
+        <h1 className="text-3xl">Katalog</h1>
+        <h1 className="text-base">Showing 8 of 12 template invitation</h1>
+      </div>
+      <div className="flex flex-col md:flex-row mt-6 w-full justify-between items-center">
         {columns.map((column, index) => (
           <div
             {...getStyleByIndex(index)}

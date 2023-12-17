@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useContext, useState } from "react";
-import { SmoothScrollContext } from "@/contexts/SmoothScroll.context";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { motion, useAnimation } from "framer-motion";
 import { Icon } from "@iconify/react";
 
@@ -35,7 +37,8 @@ const params = {
 };
 
 export default function Hero() {
-  const { scroll } = useContext(SmoothScrollContext);
+  const { scroll } = useLocomotiveScroll();
+  const ref = useRef(null);
   const controls = useAnimation();
   const [carouselBackground, setCarouselBackground] = useState(null);
   const [carouselMain, setCarouselMain] = useState(null);
@@ -57,8 +60,9 @@ export default function Hero() {
       data-scroll-section
       className="relative w-full h-screen"
       id="beranda"
+      ref={ref}
     >
-      <div class="carousel_sticky-area" id="carousel-sticky-area" />
+      <div className="carousel_sticky-area" id="carousel-sticky-area" />
       <motion.div
         className="fixed inset-0"
         data-scroll
@@ -76,12 +80,13 @@ export default function Hero() {
           modules={[Controller]}
           onSwiper={setCarouselBackground}
           controller={{ control: carouselMain }}
+          id="carousel-wrapper"
         >
           <SwiperSlide>
             <div
               className="parallax-bg"
               style={{
-                "background-image":
+                backgroundImage:
                   "url('https://source.unsplash.com/collection/2091539/1000x500')",
               }}
             />
@@ -90,7 +95,7 @@ export default function Hero() {
             <div
               className="parallax-bg "
               style={{
-                "background-color": "#000000",
+                backgroundColor: "#000000",
               }}
             >
               <Statue />
@@ -100,7 +105,7 @@ export default function Hero() {
             <div
               className="parallax-bg"
               style={{
-                "background-image":
+                backgroundImage:
                   "url('https://source.unsplash.com/collection/2091539/1000x400')",
               }}
             />

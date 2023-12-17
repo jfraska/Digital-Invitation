@@ -1,7 +1,12 @@
+"use client";
 import "./style.css";
-
-import { SmoothScrollProvider } from "@/contexts/SmoothScroll.context";
 import "locomotive-scroll/dist/locomotive-scroll.css";
+
+import { useEffect, useRef } from "react";
+import {
+  LocomotiveScrollProvider as Scroll,
+  useLocomotiveScroll,
+} from "react-locomotive-scroll";
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -16,20 +21,64 @@ import Message from "@/components/Message";
 const settings = {
   options: {
     smooth: true,
-    lerp: 0.2,
-    multiplier: 0.3,
-    mobile: {
+    multiplier: 0.8,
+    smartphone: {
       smooth: true,
     },
-    // ... all available Locomotive Scroll instance options
+    tablet: {
+      smooth: true,
+    },
   },
+  onLocationChange: (scroll) =>
+    scroll.scrollTo(0, { duration: 0, disableLerp: true }),
 };
 
 export default function Home() {
+  const containerRef = useRef(null);
+  const { scroll } = useLocomotiveScroll();
+
+  useEffect(() => {
+    if (scroll) {
+      scroll.on("scroll", () => {
+        ScrollTrigger.update();
+      });
+
+      ScrollTrigger.scrollerProxy(scrollEl, {
+        scrollTop(value) {
+          return arguments.length
+            ? scroll.scrollTo(value, { duration: 0, disableLerp: true })
+            : scroll.scroll.instance.scroll.y;
+        },
+        scrollLeft(value) {
+          return arguments.length
+            ? scroll.scrollTo(value, { duration: 0, disableLerp: true })
+            : scroll.scroll.instance.scroll.x;
+        },
+      });
+
+      const lsUpdate = () => {
+        if (scroll) {
+          scroll.update();
+        }
+      };
+
+      ScrollTrigger.addEventListener("refresh", lsUpdate);
+      ScrollTrigger.refresh();
+    }
+
+    return () => {
+      if (scroll) {
+        ScrollTrigger.removeEventListener("refresh", lsUpdate);
+        scroll.destroy();
+        console.log("Kill", scroll);
+      }
+    };
+  }, [scroll]);
+
   return (
-    <SmoothScrollProvider {...settings}>
+    <Scroll {...settings} containerRef={containerRef}>
       <Navbar />
-      <main data-scroll-container>
+      <main data-scroll-container ref={containerRef}>
         <Hero />
         <About />
         <Feature />
@@ -39,6 +88,6 @@ export default function Home() {
         <Message />
         <Footer />
       </main>
-    </SmoothScrollProvider>
+    </Scroll>
   );
 }

@@ -66,7 +66,6 @@
 
 .hover-underline-animation {
   position: relative;
-  @apply text-black;
 }
 .hover-underline-animation::after {
   content: "";
@@ -96,7 +95,7 @@
 }
 
 .parallax .scroller {
-  @apply flex flex-nowrap whitespace-nowrap uppercase text-[300px];
+  @apply flex flex-nowrap whitespace-nowrap uppercase text-[150px];
 }
 
 .parallax span {
